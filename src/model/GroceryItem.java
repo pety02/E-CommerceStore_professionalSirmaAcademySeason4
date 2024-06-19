@@ -1,18 +1,39 @@
+package model;
+
+import interfaces.Perishable;
+
 import java.time.LocalDateTime;
 
+/**
+ *
+ */
 public class GroceryItem extends InventoryItem implements Perishable {
     private LocalDateTime expireTill;
 
+    /**
+     *
+     */
     public GroceryItem() {
         super();
         this.setCategory(Category.GROCERY);
     }
 
+    /**
+     *
+     * @param quantity
+     * @param price
+     */
     public GroceryItem(int quantity, double price) {
         super(quantity, price);
         this.setCategory(Category.GROCERY);
     }
 
+    /**
+     *
+     * @param quantity
+     * @param price
+     * @param expireTill
+     */
     public GroceryItem(int quantity, double price, LocalDateTime expireTill) {
         super(quantity, price);
         this.setCategory(Category.GROCERY);
@@ -24,11 +45,18 @@ public class GroceryItem extends InventoryItem implements Perishable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isPerishable() {
         return expireTill.isBefore(LocalDateTime.now());
     }
 
+    /**
+     *
+     */
     @Override
     public void handleExpiration() {
         if(this.isPerishable()) {
@@ -36,10 +64,19 @@ public class GroceryItem extends InventoryItem implements Perishable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public LocalDateTime getExpireTill() {
         return expireTill;
     }
 
+    /**
+     *
+     * @param expireTill
+     * @throws IllegalArgumentException
+     */
     public void setExpireTill(LocalDateTime expireTill) throws IllegalArgumentException {
         if(LocalDateTime.now().isBefore(expireTill) || expireTill == null) {
             this.expireTill = expireTill;

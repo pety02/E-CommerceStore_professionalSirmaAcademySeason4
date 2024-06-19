@@ -1,3 +1,5 @@
+package model;
+
 public enum ElectronicsType {
     MOUSE,
     MONITOR,

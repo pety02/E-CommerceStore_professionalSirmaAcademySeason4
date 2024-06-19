@@ -1,18 +1,40 @@
+package model;
+
+import interfaces.Breakable;
+
+/**
+ *
+ */
 public class FragileItem extends InventoryItem implements Breakable {
     private double weight;
     private boolean isBroken;
+
+    /**
+     *
+     */
     public FragileItem() {
         super();
         this.setCategory(Category.FRAGILE);
         this.isBroken = false;
     }
 
+    /**
+     *
+     * @param quantity
+     * @param price
+     */
     public FragileItem(int quantity, double price) {
         super(quantity, price);
         this.setCategory(Category.FRAGILE);
         this.isBroken = false;
     }
 
+    /**
+     *
+     * @param quantity
+     * @param price
+     * @param weight
+     */
     public FragileItem(int quantity, double price, double weight) {
         super(quantity, price);
         this.setCategory(Category.FRAGILE);
@@ -26,10 +48,19 @@ public class FragileItem extends InventoryItem implements Breakable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public double getWeight() {
         return weight;
     }
 
+    /**
+     *
+     * @param weight
+     * @throws IllegalArgumentException
+     */
     public void setWeight(double weight) throws IllegalArgumentException {
         if(0.00 <= weight) {
             this.weight = weight;
@@ -38,11 +69,18 @@ public class FragileItem extends InventoryItem implements Breakable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean isBreakable() {
         return !this.isBroken;
     }
 
+    /**
+     *
+     */
     @Override
     public void handleBreakage() {
         if(this.isBreakable()) {
