@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  *
  */
-public class Store {
+public class Store implements Serializable {
     private static int storeNo;
     private int ID;
     private String name;
@@ -101,5 +102,14 @@ public class Store {
      */
     public void setStock(Map<InventoryItem, Integer> stock) {
         this.stock = stock;
+    }
+
+    @Override
+    public String toString() {
+        return "Store { " +
+                "ID: " + ID +
+                ", name: '" + name + '\'' +
+                ", stock: " + stock +
+                " }";
     }
 }

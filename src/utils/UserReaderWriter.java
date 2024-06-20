@@ -2,20 +2,19 @@ package utils;
 
 import interfaces.Readable;
 import interfaces.Writeable;
-import model.InventoryItem;
+import model.User;
 
 import java.io.*;
 
 /**
  *
  */
-public class InventoryReaderWriter implements Writeable<InventoryItem>, Readable<InventoryItem> {
+public class UserReaderWriter implements Readable<User>, Writeable<User> {
 
     /**
      *
      */
-    public InventoryReaderWriter() {
-
+    public UserReaderWriter() {
     }
 
     /**
@@ -26,8 +25,8 @@ public class InventoryReaderWriter implements Writeable<InventoryItem>, Readable
      * @throws ClassNotFoundException
      */
     @Override
-    public InventoryItem read(String filename) throws IOException, ClassNotFoundException {
-        return (InventoryItem) new ObjectInputStream(new FileInputStream(filename)).readObject();
+    public User read(String filename) throws IOException, ClassNotFoundException {
+        return (User) new ObjectInputStream(new FileInputStream(filename)).readObject();
     }
 
     /**
@@ -37,7 +36,7 @@ public class InventoryReaderWriter implements Writeable<InventoryItem>, Readable
      * @throws IOException
      */
     @Override
-    public void write(InventoryItem item, String filename) throws IOException {
+    public void write(User item, String filename) throws IOException {
         new ObjectOutputStream(new FileOutputStream(filename)).writeObject(item);
     }
 }

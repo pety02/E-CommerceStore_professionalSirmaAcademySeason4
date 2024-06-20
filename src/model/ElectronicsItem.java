@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class ElectronicsItem extends FragileItem {
+public class ElectronicsItem extends FragileItem implements Serializable {
     private ElectronicsType type;
 
     /**
@@ -61,5 +63,16 @@ public class ElectronicsItem extends FragileItem {
      */
     public void setType(ElectronicsType type) {
         this.type = type;
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "ElectronicsItem { " +
+                "type: " + type +
+                " }";
     }
 }

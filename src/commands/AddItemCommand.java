@@ -2,22 +2,33 @@ package commands;
 
 import model.InventoryItem;
 import model.Store;
+import utils.StoreReaderWriter;
+
+import java.io.IOException;
 import java.util.Map;
 
 /**
  *
  */
-public class AddItem implements OrderCommand {
-    private final InventoryItem item;
-    private final int quantity;
+public class AddItemCommand extends ParentCommand implements OrderCommand {
+    private InventoryItem item;
+    private int quantity;
+
+    /**
+     *
+     * @param command
+     */
+    public AddItemCommand(String command) {
+        super(command);
+    }
 
     /**
      *
      * @param item
      * @param quantity
      */
-    public AddItem(InventoryItem item, int quantity) {
-
+    public AddItemCommand(InventoryItem item, int quantity) {
+        super("add_item");
         this.item = item;
         this.quantity = Math.max(quantity, 0);
     }
@@ -36,6 +47,12 @@ public class AddItem implements OrderCommand {
         } catch (IllegalArgumentException ex) {
             ex.fillInStackTrace();
             System.out.printf("Item quantity not enough!%n");
+        }
+        StoreReaderWriter srw = new StoreReaderWriter();
+        try {
+            srw.write(store, "store.txt");
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
         }
     }
 }

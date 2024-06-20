@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class InventoryItem extends AbstractItem {
+public class InventoryItem extends AbstractItem implements Serializable {
     private static int ItemNo = 0;
     private int ID;
     private Category category;
@@ -137,5 +139,19 @@ public class InventoryItem extends AbstractItem {
         } else {
             throw new IllegalArgumentException("Price should be positive floating point number.");
         }
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "InventoryItem { " +
+                "ID: " + ID +
+                ", category: " + category +
+                ", quantity: " + quantity +
+                ", price: " + price +
+                " }";
     }
 }

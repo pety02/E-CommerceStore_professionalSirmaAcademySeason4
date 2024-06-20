@@ -1,13 +1,15 @@
 package model;
 
 import interfaces.PaymentTool;
+import interfaces.Sellable;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  *
  */
-public class DebitCard implements PaymentTool {
+public class DebitCard implements PaymentTool, Serializable {
     private static int cardNo;
     private int ID;
     private String IBAN;
@@ -100,12 +102,22 @@ public class DebitCard implements PaymentTool {
      * @throws IllegalArgumentException
      */
     @Override
-    public void pay(double total) throws IllegalArgumentException {
+    public void pay(double total) throws RuntimeException {
         if(total <= this.balance) {
             this.balance -= total;
-            System.out.printf("Successful debit card payment transaction with IBAN: %s.%n", this.IBAN);
+            System.out.printf("Successful debit card payment transaction with IBAN: %s. Your current balance is: %.2f%n", this.IBAN, this.balance);
         } else {
             throw new RuntimeException("Cannot execute transaction! No enough money.");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "DebitCard { " +
+                "ID: " + ID +
+                ", IBAN: '" + IBAN + '\'' +
+                ", balance: " + balance +
+                ", owner: " + owner +
+                " }";
     }
 }

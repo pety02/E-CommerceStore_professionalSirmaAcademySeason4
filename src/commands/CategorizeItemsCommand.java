@@ -3,7 +3,9 @@ package commands;
 import model.Category;
 import model.InventoryItem;
 import model.Store;
+import utils.StoreReaderWriter;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -11,7 +13,23 @@ import java.util.Map;
 /**
  *
  */
-public class CategorizeItems implements StoreCommand {
+public class CategorizeItemsCommand extends ParentCommand implements StoreCommand {
+
+    /**
+     *
+     */
+    public CategorizeItemsCommand() {
+        super("categorize_items");
+    }
+
+    /**
+     *
+     * @param command
+     */
+    public CategorizeItemsCommand(String command) {
+        super(command);
+    }
+
     /**
      *
      * @param store
@@ -38,6 +56,12 @@ public class CategorizeItems implements StoreCommand {
                 System.out.printf("%s,%n\t", currentItem);
             }
             System.out.println();
+        }
+        StoreReaderWriter srw = new StoreReaderWriter();
+        try {
+            srw.write(store, "store.txt");
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
         }
     }
 }

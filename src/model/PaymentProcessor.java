@@ -1,12 +1,13 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 /**
  *
  */
-public class PaymentProcessor {
+public class PaymentProcessor implements Serializable {
     private static int paymentNo = 0;
     private int ID;
     private LocalDateTime dateTime;
@@ -22,7 +23,7 @@ public class PaymentProcessor {
             if(currentDebitCard.getIBAN().equals(IBAN)) {
                 try {
                     currentDebitCard.pay(this.order.getTotalPrice());
-                } catch (IllegalArgumentException ex) {
+                } catch (RuntimeException ex) {
                     ex.fillInStackTrace();
                     System.out.println(ex.getMessage());
                 }
@@ -193,11 +194,30 @@ public class PaymentProcessor {
             } else if(this.paymentType == PaymentType.PAYPAL) {
                 this.payByPaypalWallet(IBAN);
             } else {
+                isSuccess = false;
                 throw new IllegalArgumentException("Unknown payment type.");
             }
             this.isSuccess = true;
         } else {
             this.isSuccess = false;
         }
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "PaymentProcessor { " +
+                "ID: " + ID +
+                ", dateTime: " + dateTime +
+                ", user: " + user +
+                ", userDebitCards: " + userDebitCards +
+                ", userPaypalWallets: " + userPaypalWallets +
+                ", order: " + order +
+                ", paymentType: " + paymentType +
+                ", isSuccess: " + isSuccess +
+                " }";
     }
 }

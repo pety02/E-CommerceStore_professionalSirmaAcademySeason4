@@ -2,10 +2,12 @@ package model;
 
 import interfaces.Breakable;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class FragileItem extends InventoryItem implements Breakable {
+public class FragileItem extends InventoryItem implements Breakable, Serializable {
     private double weight;
     private boolean isBroken;
 
@@ -86,5 +88,13 @@ public class FragileItem extends InventoryItem implements Breakable {
         if(this.isBreakable()) {
             this.isBroken = true;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "FragileItem { " +
+                "weight: " + weight +
+                ", isBroken: " + isBroken +
+                " }";
     }
 }

@@ -2,12 +2,13 @@ package model;
 
 import interfaces.PaymentTool;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
  *
  */
-public class PaypalWallet implements PaymentTool {
+public class PaypalWallet implements PaymentTool, Serializable {
     private static int cardNo;
     private int ID;
     private String IBAN;
@@ -126,5 +127,20 @@ public class PaypalWallet implements PaymentTool {
         } else {
             throw new RuntimeException("Cannot execute transaction! No enough money.");
         }
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "PaypalWallet { " +
+                "ID: " + ID +
+                ", IBAN: '" + IBAN + '\'' +
+                ", name: '" + name + '\'' +
+                ", balance: " + balance +
+                ", owner: " + owner +
+                " }";
     }
 }

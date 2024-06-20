@@ -2,12 +2,13 @@ package model;
 
 import interfaces.Perishable;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  *
  */
-public class GroceryItem extends InventoryItem implements Perishable {
+public class GroceryItem extends InventoryItem implements Perishable, Serializable {
     private LocalDateTime expireTill;
 
     /**
@@ -83,5 +84,16 @@ public class GroceryItem extends InventoryItem implements Perishable {
         } else {
             throw new IllegalArgumentException("Expiration date should be after or equal to current date.");
         }
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "GroceryItem { " +
+                "expireTill: " + expireTill +
+                " }";
     }
 }

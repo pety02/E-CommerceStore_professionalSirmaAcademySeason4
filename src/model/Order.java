@@ -1,21 +1,23 @@
 package model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.Map;
 
 /**
  *
  */
-public class Order {
+public class Order implements Serializable {
     private static int orderNo = 0;
     private int ID;
-    private LinkedList<InventoryItem> bucket;
+    private Map<InventoryItem, Integer> bucket;
     private double totalPrice;
 
     /**
      *
      * @param bucket
      */
-    public Order(LinkedList<InventoryItem> bucket) {
+    public Order(Map<InventoryItem, Integer> bucket) {
         this.setID();
         this.setBucket(bucket);
         this.calculateTotalPrice();
@@ -40,7 +42,7 @@ public class Order {
      *
      * @return
      */
-    public LinkedList<InventoryItem> getBucket() {
+    public Map<InventoryItem, Integer> getBucket() {
         return bucket;
     }
 
@@ -48,7 +50,7 @@ public class Order {
      *
      * @param bucket
      */
-    public void setBucket(LinkedList<InventoryItem> bucket) {
+    public void setBucket(Map<InventoryItem, Integer> bucket) {
         this.bucket = bucket;
     }
 
@@ -64,8 +66,21 @@ public class Order {
      *
      */
     public void calculateTotalPrice() {
-        for(InventoryItem currentItem : this.bucket) {
-            this.totalPrice += currentItem.getPrice();
+        for(Map.Entry<InventoryItem, Integer> currentItem : this.bucket.entrySet()) {
+            this.totalPrice += (currentItem.getKey().getPrice() * currentItem.getValue());
         }
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "Order { " +
+                "ID: " + ID +
+                ", bucket: " + bucket +
+                ", totalPrice: " + totalPrice +
+                " }";
     }
 }

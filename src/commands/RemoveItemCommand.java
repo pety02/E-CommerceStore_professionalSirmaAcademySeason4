@@ -2,22 +2,35 @@ package commands;
 
 import model.InventoryItem;
 import model.Store;
+import utils.StoreReaderWriter;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
  *
  */
-public class RemoveItem implements OrderCommand {
+public class RemoveItemCommand extends ParentCommand implements OrderCommand {
     private final int itemID;
     private final int quantity;
+
+    /**
+     *
+     * @param command
+     */
+    public RemoveItemCommand(String command) {
+        super(command);
+        this.itemID = 0;
+        this.quantity = 0;
+    }
 
     /**
      *
      * @param itemID
      * @param quantity
      */
-    public RemoveItem(int itemID, int quantity) {
+    public RemoveItemCommand(int itemID, int quantity) {
+        super("remove_item");
         this.itemID = itemID;
         this.quantity = Math.max(quantity, 0);
     }
@@ -35,6 +48,13 @@ public class RemoveItem implements OrderCommand {
                 store.addInStock(bucketItem.getKey(), this.quantity);
                 System.out.printf("Item %s was successfully removed from your bucket.%n", bucketItem.getKey());
             }
+        }
+
+        StoreReaderWriter srw = new StoreReaderWriter();
+        try {
+            srw.write(store, "store.txt");
+        } catch (IOException ex) {
+            ex.fillInStackTrace();
         }
     }
 }

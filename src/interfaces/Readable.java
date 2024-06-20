@@ -4,6 +4,6 @@ import model.InventoryItem;
 
 import java.io.IOException;
 
-public interface Readable {
-    InventoryItem read(String filename) throws IOException, ClassNotFoundException;
+public interface Readable<T> {
+    T read(String filename) throws IOException, ClassNotFoundException;
 }

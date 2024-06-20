@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  */
-public class User {
+public class User implements Serializable {
     private static int userNo = 0;
     private int ID;
     private String nickname;
@@ -64,5 +66,14 @@ public class User {
      */
     public void updateMoney(double money) {
         this.totalMoney = money;
+    }
+
+    @Override
+    public String toString() {
+        return "User { " +
+                "ID: " + ID +
+                ", nickname: '" + nickname + '\'' +
+                ", totalMoney: " + totalMoney +
+                " }";
     }
 }
