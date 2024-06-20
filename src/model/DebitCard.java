@@ -1,7 +1,6 @@
 package model;
 
 import interfaces.PaymentTool;
-import interfaces.Sellable;
 
 import java.io.Serializable;
 import java.util.Random;

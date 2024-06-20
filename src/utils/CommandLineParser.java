@@ -99,10 +99,18 @@ public class CommandLineParser {
         }
      }
 
+    /**
+     *
+     * @return
+     */
     public String getCommand() {
         return command;
     }
 
+    /**
+     *
+     * @return
+     */
     public ParentCommand getParsedCommand() {
         return parsedCommand;
     }

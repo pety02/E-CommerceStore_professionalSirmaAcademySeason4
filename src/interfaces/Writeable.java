@@ -1,6 +1,5 @@
 package interfaces;
 
-import model.InventoryItem;
 
 import java.io.IOException;
 

@@ -10,13 +10,24 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class Application {
+    /**
+     *
+     * @param store
+     */
     private static void fillStore(Store store) {
         store.addInStock(new FragileItem(20, 100.25, 25.00), 25);
         store.addInStock(new ElectronicsItem(100, 10.50, 1.00, ElectronicsType.MOUSE), 100);
         store.addInStock(new GroceryItem(5, 5.85,
                 LocalDateTime.of(2024, Month.NOVEMBER,15, 12, 30)), 5);
     }
+
+    /**
+     *
+     */
     private static void initMenu() {
         System.out.println("MENU:");
         System.out.println("display_items");
@@ -27,6 +38,18 @@ public class Application {
         System.out.println("choose_payment_type *<payment_type>");
     }
 
+    /**
+     *
+     * @param cmd
+     * @param customerBucket
+     * @param store
+     * @param customer
+     * @param customerCards
+     * @param customerWallets
+     * @param paymentType
+     * @param paymentIBAN
+     * @throws IllegalArgumentException
+     */
     private static void executeCommand(ParentCommand cmd, Map<InventoryItem, Integer> customerBucket,
                                        Store store, User customer, LinkedList<DebitCard> customerCards,
                                        LinkedList<PaypalWallet> customerWallets, String paymentType,
@@ -58,6 +81,11 @@ public class Application {
             }
         };
     }
+
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Map<InventoryItem, Integer> stock = new HashMap<>();
         Store myStore = new Store("MyStore", stock);
@@ -96,6 +124,6 @@ public class Application {
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
-        } while (!cmdLine.equals("END"));
+        } while (true);
     }
 }
