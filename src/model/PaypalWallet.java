@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Random;
 
 /**
- *
+ * Paypal wallet class
  */
 public class PaypalWallet implements PaymentTool, Serializable {
     private static int cardNo;
@@ -17,10 +17,10 @@ public class PaypalWallet implements PaymentTool, Serializable {
     private User owner;
 
     /**
-     *
-     * @param name
-     * @param balance
-     * @param owner
+     * Constructs paypal wallet object by name, balance and wallet.
+     * @param name the given name
+     * @param balance the given balance
+     * @param owner the given owner
      */
     public PaypalWallet(String name, double balance, User owner) {
         this.setID();
@@ -31,78 +31,81 @@ public class PaypalWallet implements PaymentTool, Serializable {
     }
 
     /**
-     *
-     * @return
+     * Id Getter
+     * @return the paypal wallet's id.
      */
     public int getID() {
         return ID;
     }
 
     /**
-     *
+     * Sets the paypal wallet's id.
      */
     public void setID() {
         this.ID = ++PaypalWallet.cardNo;
     }
 
     /**
-     *
-     * @return
+     * Name Getter
+     * @return the paypal wallet's name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @param name
+     * Sets the name of the paypal wallet's name.
+     * @param name the name of the paypal wallet.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     *
-     * @return
+     * Balance Getter
+     * @return the balance of the paypal wallet's.
      */
     public double getBalance() {
         return balance;
     }
 
     /**
-     *
-     * @param balance
+     * Sets the balance of the paypal wallet's.
+     * @param balance the give balance.
      */
     public void setBalance(double balance) {
         this.balance = balance;
     }
 
     /**
-     *
-     * @return
+     * Owner Getter
+     * @return the owner of the paypal wallet's/
      */
     public User getOwner() {
         return owner;
     }
 
     /**
-     *
-     * @param owner
+     * Sets the owner of the paypal wallet's.
+     * @param owner the owner of the paypal wallet's.
      */
     public void setOwner(User owner) {
         this.owner = owner;
     }
 
     /**
-     *
-     * @return
+     * IBAN Getter
+     * @return the IBAN of the paypal wallet's.
      */
     public String getIBAN() {
         return IBAN;
     }
 
     /**
-     *
+     * Generates new IBAN as sequence of "BGN" and 10 random digits.
+     * It is not the right way for generating IBANs because you can
+     * easily receive identical IBANs, but it is enough for educational
+     * purposes.
      */
     public void generateIBAN() {
         StringBuilder sb = new StringBuilder("BGN");
@@ -115,9 +118,10 @@ public class PaypalWallet implements PaymentTool, Serializable {
     }
 
     /**
-     *
-     * @param total
-     * @throws IllegalArgumentException
+     * Paying an amount of money.
+     * @param total the given amount of money
+     * @throws IllegalArgumentException when the amount of money that should be
+     * paid is bigger than the owner debit card's balance.
      */
     @Override
     public void pay(double total) throws IllegalArgumentException {
@@ -130,8 +134,8 @@ public class PaypalWallet implements PaymentTool, Serializable {
     }
 
     /**
-     *
-     * @return
+     * Predefined toString() method
+     * @return the representation of the paypal wallet as a string.
      */
     @Override
     public String toString() {

@@ -58,7 +58,7 @@ public class DebitCard implements PaymentTool, Serializable {
     /**
      * Generates new IBAN as sequence of "BGN" and 10 random digits.
      * It is not the right way for generating IBANs because you can
-     * easily receive identical IBANs but it is enough for educational
+     * easily receive identical IBANs, but it is enough for educational
      * purposes.
      */
     public void generateIBAN() {

@@ -11,12 +11,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- *
+ * Application run class
  */
 public class Application {
     /**
-     *
-     * @param store
+     * Fills a given store with all its items.
+     * @param store the given store
      */
     private static void fillStore(Store store) {
         store.addInStock(new FragileItem(20, 100.25, 25.00), 25);
@@ -26,7 +26,7 @@ public class Application {
     }
 
     /**
-     *
+     * Initializes a menu.
      */
     private static void initMenu() {
         System.out.println("MENU:");
@@ -39,16 +39,16 @@ public class Application {
     }
 
     /**
-     *
-     * @param cmd
-     * @param customerBucket
-     * @param store
-     * @param customer
-     * @param customerCards
-     * @param customerWallets
-     * @param paymentType
-     * @param paymentIBAN
-     * @throws IllegalArgumentException
+     * Executes a given command.
+     * @param cmd the given command
+     * @param customerBucket the given customer bucket
+     * @param store the given store
+     * @param customer the given customer
+     * @param customerCards the given customer's debit cards list
+     * @param customerWallets the given customer's paypal wallets list
+     * @param paymentType the given payment type
+     * @param paymentIBAN the given payment IBAN
+     * @throws IllegalArgumentException when the command is invalid or unknown.
      */
     private static void executeCommand(ParentCommand cmd, Map<InventoryItem, Integer> customerBucket,
                                        Store store, User customer, LinkedList<DebitCard> customerCards,
@@ -91,8 +91,8 @@ public class Application {
     }
 
     /**
-     *
-     * @param args
+     * Application start point
+     * @param args the arguments of the main() method
      */
     public static void main(String[] args) {
         Map<InventoryItem, Integer> stock = new HashMap<>();
