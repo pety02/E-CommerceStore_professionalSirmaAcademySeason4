@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 
 /**
- *
+ * Payment processor class
  */
 public class PaymentProcessor implements Serializable {
     private static int paymentNo = 0;
@@ -45,13 +45,14 @@ public class PaymentProcessor implements Serializable {
     }
 
     /**
-     *
-     * @param dateTime
-     * @param user
-     * @param debitCards
-     * @param paypalWallets
-     * @param order
-     * @param paymentType
+     * Constructs payment processor object by given dateTime, customer, customer's debit cards,
+     * customer's paypal wallets, order object and payment type, preferred by the customer.
+     * @param dateTime the given dateTime
+     * @param user the given customer
+     * @param debitCards the given customer's debit cards list
+     * @param paypalWallets the given customer's paypal wallets list
+     * @param order the given order object
+     * @param paymentType the given payment type, preferred by the customer
      */
     public PaymentProcessor(LocalDateTime dateTime, User user, LinkedList<DebitCard> debitCards, LinkedList<PaypalWallet> paypalWallets, Order order, PaymentType paymentType) {
         this.setID();
@@ -65,127 +66,127 @@ public class PaymentProcessor implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Payment processor id Getter
+     * @return the current payment processor object's id.
      */
     public int getID() {
         return ID;
     }
 
     /**
-     *
+     * Sets the current payment processor object's id as a next payment number.
      */
     public void setID() {
         this.ID = ++PaymentProcessor.paymentNo;
     }
 
     /**
-     *
-     * @return
+     * Payment processor object's user Getter
+     * @return the current payment processor object's user.
      */
     public User getUser() {
         return user;
     }
 
     /**
-     *
-     * @param user
+     * Sets the current payment processor object's user.
+     * @param user the given user
      */
     public void setUser(User user) {
         this.user = user;
     }
 
     /**
-     *
-     * @return
+     * Payment processor object's order Getter
+     * @return the current payment processor object's order.
      */
     public Order getOrder() {
         return order;
     }
 
     /**
-     *
-     * @param order
+     * Sets the current payment processor object's order.
+     * @param order the given order.
      */
     public void setOrder(Order order) {
         this.order = order;
     }
 
     /**
-     *
-     * @return
+     * Payment processor object's payment type Getter
+     * @return the current payment processor object's payment type.
      */
     public PaymentType getPaymentType() {
         return paymentType;
     }
 
     /**
-     *
-     * @param paymentType
+     * Sets the current payment processor object's payment type
+     * @param paymentType the given payment type.
      */
     public void setPaymentType(PaymentType paymentType) {
         this.paymentType = paymentType;
     }
 
     /**
-     *
-     * @return
+     * Payment processor object's dateTime Getter
+     * @return the current payment processor object's fateTime.
      */
     public LocalDateTime getDateTime() {
         return dateTime;
     }
 
     /**
-     *
-     * @param dateTime
+     * Sets the current payment processor object's dateTime.
+     * @param dateTime the given dateTime.
      */
     public void setDateTime(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 
     /**
-     *
-     * @return
+     * Payment processor object's isSuccess Getter
+     * @return the current payment processor object's isSuccess.
      */
     public boolean isSuccess() {
         return isSuccess;
     }
 
     /**
-     *
-     * @return
+     * Payment processor object's user's debit cards list Getter.
+     * @return the current payment processor object's user's debit cards list.
      */
     public LinkedList<DebitCard> getUserDebitCards() {
         return userDebitCards;
     }
 
     /**
-     *
-     * @param userDebitCards
+     * Sets the current payment processor object's user's debit cards list.
+     * @param userDebitCards the given user's debit cards list.
      */
     public void setUserDebitCards(LinkedList<DebitCard> userDebitCards) {
         this.userDebitCards = userDebitCards;
     }
 
     /**
-     *
-     * @return
+     * Payment processor object's user's paypal wallets list Getter
+     * @return the current payment processor object's user's paypal wallets list.
      */
     public LinkedList<PaypalWallet> getUserPaypalWallets() {
         return userPaypalWallets;
     }
 
     /**
-     *
-     * @param userPaypalWallets
+     * Sets the current payment processor object's user's paypal wallets list.
+     * @param userPaypalWallets the given user's paypal wallets list
      */
     public void setUserPaypalWallets(LinkedList<PaypalWallet> userPaypalWallets) {
         this.userPaypalWallets = userPaypalWallets;
     }
 
     /**
-     *
-     * @param IBAN
+     * Makes an paying transaction by given IBAN.
+     * @param IBAN the given IBAN
      */
     public void makeTransaction(String IBAN) {
         if(this.user.getTotalMoney() <= this.order.getTotalPrice()) {
@@ -201,8 +202,8 @@ public class PaymentProcessor implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Predefine toString() method
+     * @return the representation of the payment processor object as a string.
      */
     @Override
     public String toString() {
