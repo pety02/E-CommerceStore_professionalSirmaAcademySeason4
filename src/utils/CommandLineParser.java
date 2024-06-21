@@ -6,7 +6,7 @@ import model.*;
 import java.time.LocalDateTime;
 
 /**
- *
+ * Command line parser class
  */
 public class CommandLineParser {
     private String command;
@@ -15,7 +15,7 @@ public class CommandLineParser {
     private InventoryItem item;
 
     /**
-     *
+     * Constructs by default
      */
     public CommandLineParser() {
         this.command = null;
@@ -23,15 +23,17 @@ public class CommandLineParser {
     }
 
     /**
-     *
-     * @param commandLine
-     * @throws IllegalArgumentException
+     * Parses a given command line.
+     * @param commandLine the given command line
+     * @throws IllegalArgumentException when the command line is invalid.
      */
     public void parseCommand(String commandLine) throws IllegalArgumentException {
-        if(!CommandValidator.validate(commandLine)) {
+        // Validates the command line before start parsing it.
+        if(!CommandLineValidator.validate(commandLine)) {
             throw new IllegalArgumentException("Invalid command line!");
         }
 
+        // Parsing the command line.
         String[] splitCommandLine = commandLine.split(" ");
         String parsedCommand = splitCommandLine[0];
         this.command = parsedCommand;
@@ -100,16 +102,16 @@ public class CommandLineParser {
      }
 
     /**
-     *
-     * @return
+     * Command Getter
+     * @return the current command line parser's command name.
      */
     public String getCommand() {
         return command;
     }
 
     /**
-     *
-     * @return
+     * Parsed command Getter
+     * @return the current command line parser's parsed command.
      */
     public ParentCommand getParsedCommand() {
         return parsedCommand;

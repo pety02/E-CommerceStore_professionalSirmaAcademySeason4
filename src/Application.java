@@ -1,7 +1,7 @@
 import commands.*;
 import model.*;
 import utils.CommandLineParser;
-import utils.CommandValidator;
+import utils.CommandLineValidator;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -100,6 +100,7 @@ public class Application {
         fillStore(myStore);
 
         User customer = new User("Petya");
+        Map<InventoryItem, Integer> customerBucket = new HashMap<>();
         LinkedList<DebitCard> customerDebitCards = new LinkedList<>();
         customerDebitCards.add(new DebitCard(1000.00, customer));
         LinkedList<PaypalWallet> customerPaypalWallets = new LinkedList<>();
@@ -116,13 +117,12 @@ public class Application {
                 }
                 System.out.print(">");
                 cmdLine = sc.nextLine();
-            } while (!CommandValidator.validate(cmdLine));
+            } while (!CommandLineValidator.validate(cmdLine));
             if(cmdLine.equals("END")) {
                 break;
             }
             CommandLineParser cmdParser = new CommandLineParser();
             cmdParser.parseCommand(cmdLine);
-            Map<InventoryItem, Integer> customerBucket = new HashMap<>();
             ParentCommand executableCommand = cmdParser.getParsedCommand();
             try {
                 String paymentType = "";

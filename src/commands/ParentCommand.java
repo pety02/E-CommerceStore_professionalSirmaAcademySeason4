@@ -1,7 +1,5 @@
 package commands;
 
-import utils.CommandValidator;
-
 /**
  * Parent command class
  */
