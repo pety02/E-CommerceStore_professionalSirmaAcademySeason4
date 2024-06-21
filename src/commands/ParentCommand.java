@@ -3,15 +3,23 @@ package commands;
 import utils.CommandValidator;
 
 /**
- *
+ * Parent command class
  */
 public class ParentCommand {
     private String command;
     private CommandType type;
 
     /**
-     *
-     * @param command
+     * Constructs parent command object as the default command - display_items.
+     */
+    public ParentCommand() {
+        this.setCommand("display_items");
+        this.setType(CommandType.DISPLAY_ITEMS);
+    }
+
+    /**
+     * Constructs parent command object by given command name.
+     * @param command the given command name
      */
     public ParentCommand(String command) {
         try {
@@ -32,27 +40,40 @@ public class ParentCommand {
     }
 
     /**
-     *
-     * @return
+     * Command Getter
+     * @return the command name as string.
      */
     public String getCommand() {
         return command;
     }
 
     /**
-     *
-     * @param command
-     * @throws IllegalArgumentException
+     * Sets the given command name as name of the current command.
+     * @param command the given command name
+     * @throws IllegalArgumentException when the command name is invalid.
      */
     public void setCommand(String command) throws IllegalArgumentException {
-        if(CommandValidator.validate(command)) {
+        if(command.equals("add_item") || command.equals("place_order") || command.equals("display_items")
+        || command.equals("remove_item") || command.equals("categorize_items") || command.equals("choose_payment_type")) {
             this.command = command;
         } else {
             throw new IllegalArgumentException("Invalid command!");
         }
     }
 
+    /**
+     * Command type Getter
+     * @return the command type.
+     */
     public CommandType getType() {
         return type;
+    }
+
+    /**
+     * Sets the given command type as type of the current command.
+     * @param type the given command type
+     */
+    public void setType(CommandType type) {
+        this.type = type;
     }
 }

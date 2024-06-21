@@ -8,35 +8,71 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- *
+ * Add item command class.
  */
 public class AddItemCommand extends ParentCommand implements OrderCommand {
+
     private InventoryItem item;
     private int quantity;
 
     /**
-     *
-     * @param command
+     * Constructs add item command object from a string.
+     * @param command the name of the command
      */
     public AddItemCommand(String command) {
         super(command);
+        this.setItem(null);
+        this.setQuantity(0);
     }
 
     /**
-     *
-     * @param item
-     * @param quantity
+     * Constructs add item command by given item and given quantity.
+     * @param item given item
+     * @param quantity given quantity
      */
     public AddItemCommand(InventoryItem item, int quantity) {
-        super("add_item");
+        this.setCommand("add_item");
+        this.setItem(item);
+        this.setQuantity(quantity);
+        this.setType(CommandType.ADD_ITEM);
+    }
+
+    /**
+     * Item Getter
+     * @return the item.
+     */
+    public InventoryItem getItem() {
+        return item;
+    }
+
+    /**
+     * Sets the item given item's value
+     * @param item given item
+     */
+    public void setItem(InventoryItem item) {
         this.item = item;
+    }
+
+    /**
+     * Quantity Getter
+     * @return the quantity.
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * Sets the quantity given quantity value.
+     * @param quantity given quantity
+     */
+    public void setQuantity(int quantity) {
         this.quantity = Math.max(quantity, 0);
     }
 
     /**
-     *
-     * @param bucket
-     * @param store
+     * Add items to customer's bucket and remove them from the store's stock
+     * @param bucket the customer's bucket
+     * @param store the store
      */
     @Override
     public void execute(Map<InventoryItem, Integer> bucket, Store store) {
@@ -48,6 +84,8 @@ public class AddItemCommand extends ParentCommand implements OrderCommand {
             ex.fillInStackTrace();
             System.out.printf("Item quantity not enough!%n");
         }
+
+        // Write down the shop's new changes in a text file.
         StoreReaderWriter srw = new StoreReaderWriter();
         try {
             srw.write(store, "store.txt");

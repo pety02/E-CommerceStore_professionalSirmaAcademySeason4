@@ -11,28 +11,28 @@ import java.util.LinkedList;
 import java.util.Map;
 
 /**
- *
+ * Categorize items command class
  */
 public class CategorizeItemsCommand extends ParentCommand implements StoreCommand {
 
     /**
-     *
+     * Constructs categorize command object by default
      */
     public CategorizeItemsCommand() {
         super("categorize_items");
     }
 
     /**
-     *
-     * @param command
+     * Constructs categorize items command object by command name.
+     * @param command the command name
      */
     public CategorizeItemsCommand(String command) {
         super(command);
     }
 
     /**
-     *
-     * @param store
+     * Categorize all store items in stock.
+     * @param store the store
      */
     @Override
     public void execute(Store store) {
@@ -52,16 +52,16 @@ public class CategorizeItemsCommand extends ParentCommand implements StoreComman
 
         for (Map.Entry<Category, LinkedList<InventoryItem>> entry : categories.entrySet()) {
             System.out.printf("%s:%n\t", entry.getKey().name().toUpperCase());
+            int itemsCounter = 0;
             for(InventoryItem currentItem : entry.getValue()) {
+                if(itemsCounter  == categories.size()) {
+                    System.out.printf("%s%n\t", currentItem);
+                    break;
+                }
                 System.out.printf("%s,%n\t", currentItem);
+                ++itemsCounter;
             }
             System.out.println();
-        }
-        StoreReaderWriter srw = new StoreReaderWriter();
-        try {
-            srw.write(store, "store.txt");
-        } catch (IOException ex) {
-            ex.fillInStackTrace();
         }
     }
 }

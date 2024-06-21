@@ -49,16 +49,16 @@ public class PaymentProcessor implements Serializable {
      * @param dateTime
      * @param user
      * @param debitCards
-     * @param paypalWllets
+     * @param paypalWallets
      * @param order
      * @param paymentType
      */
-    public PaymentProcessor(LocalDateTime dateTime, User user, LinkedList<DebitCard> debitCards, LinkedList<PaypalWallet> paypalWllets, Order order, PaymentType paymentType) {
+    public PaymentProcessor(LocalDateTime dateTime, User user, LinkedList<DebitCard> debitCards, LinkedList<PaypalWallet> paypalWallets, Order order, PaymentType paymentType) {
         this.setID();
         this.setDateTime(dateTime);
         this.setUser(user);
-        this.userDebitCards = debitCards;
-        this.userPaypalWallets = paypalWllets;
+        this.setUserDebitCards(debitCards);
+        this.setUserPaypalWallets(paypalWallets);
         this.setOrder(order);
         this.isSuccess = false;
         this.setPaymentType(paymentType);
@@ -193,9 +193,6 @@ public class PaymentProcessor implements Serializable {
                 this.payByDebitCard(IBAN);
             } else if(this.paymentType == PaymentType.PAYPAL) {
                 this.payByPaypalWallet(IBAN);
-            } else {
-                isSuccess = false;
-                throw new IllegalArgumentException("Unknown payment type.");
             }
             this.isSuccess = true;
         } else {

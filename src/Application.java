@@ -60,9 +60,17 @@ public class Application {
         switch (cmd.getType()) {
             case ADD_ITEM -> {
                 ((AddItemCommand) cmd).execute(customerBucket, store);
+                System.out.printf("%d items in bucket %n", customerBucket.size());
+                for(Map.Entry<InventoryItem, Integer> item : customerBucket.entrySet()) {
+                    System.out.println(item);
+                }
             }
             case REMOVE_ITEM -> {
                 ((RemoveItemCommand) cmd).execute(customerBucket, store);
+                System.out.printf("%d items in bucket %n", customerBucket.size());
+                for(Map.Entry<InventoryItem, Integer> item : customerBucket.entrySet()) {
+                    System.out.println(item);
+                }
             }
             case DISPLAY_ITEMS -> {
                 ((DisplayItemsCommand) cmd).execute(store);
@@ -96,7 +104,7 @@ public class Application {
         customerDebitCards.add(new DebitCard(1000.00, customer));
         LinkedList<PaypalWallet> customerPaypalWallets = new LinkedList<>();
         customerPaypalWallets.add(new PaypalWallet("Petya Paypal wallet", 500.25, customer));
-        System.out.println("Welcome to the E-commerce Console Application!");
+        System.out.println("Welcome to the E-commerce Store Console Application!");
         String cmdLine = "";
         Scanner sc = new Scanner(System.in);
 
@@ -125,5 +133,7 @@ public class Application {
                 System.out.println(ex.getMessage());
             }
         } while (true);
+        System.out.println("Thank you for shopping from E-Commerce Store! Goodbye...");
+        System.exit(0);
     }
 }
